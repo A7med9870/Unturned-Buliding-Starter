@@ -18,7 +18,13 @@ from mathutils import Quaternion
 from bpy.types import Panel, AddonPreferences
 from bpy.props import BoolProperty, EnumProperty
 from . import exy
+from . import Floors
 from . import exy_extra
+from . import Walls
+from . import Doors
+from . import Windows
+from . import Roofs
+from . import Ramparts
 # Directory for the add-on
 icon_dir = os.path.join(os.path.dirname(__file__), "icons")
 
@@ -42,15 +48,9 @@ def load_object_from_blend(addon_dir, blend_filename, object_name):
             
             break
 #options menu
-class VRCvvv(bpy.types.AddonPreferences):
+class Settingsofwed(bpy.types.AddonPreferences):
     bl_idname = __name__
 
-    #show_shapekeylist_panel: bpy.props.BoolProperty(
-    #    name="Show Listing ShapeKeys custom panel",
-    #    description="A panel on the side, to see what shapekeys you have; still on buggy state",
-    #    default=False,
-    #    update=lambda self, context: context.area.tag_redraw(),
-    #)
     documentation_url: bpy.props.StringProperty(
         name="Documentation URL",
         description="URL for the addon documentation",
@@ -66,6 +66,11 @@ class VRCvvv(bpy.types.AddonPreferences):
         description="URL for the Creator Instagram",
         default="https://www.instagram.com/a7hmed9870/reels/?hl=en",
     )
+    Inspire_url: bpy.props.StringProperty(
+        name="insipre URL",
+        description="URL for the Creator that inspired this addon",
+        default="https://www.instagram.com/a7hmed9870/reels/?hl=en",
+    )
     show_Export_panel: bpy.props.BoolProperty(
         name="Show Export to FBX Panel",
         description="Toggle visibility of the Export to FBX Panel",
@@ -75,6 +80,42 @@ class VRCvvv(bpy.types.AddonPreferences):
     show_Extra_objects_panel: bpy.props.BoolProperty(
         name="Extra Meshes",
         description="Toggle visibility of Extra meshs in dev",
+        default=True,
+        update=lambda self, context: context.area.tag_redraw(),
+    )
+    show_Floors_objects_panel: bpy.props.BoolProperty(
+        name="Floors",
+        description="Toggle visibility of Floors meshs",
+        default=True,
+        update=lambda self, context: context.area.tag_redraw(),
+    )
+    show_Walls_objects_panel: bpy.props.BoolProperty(
+        name="Walls",
+        description="Toggle visibility of Walls meshs",
+        default=True,
+        update=lambda self, context: context.area.tag_redraw(),
+    )
+    show_doors_objects_panel: bpy.props.BoolProperty(
+        name="Doors",
+        description="Toggle visibility of Doors meshs",
+        default=True,
+        update=lambda self, context: context.area.tag_redraw(),
+    )
+    show_windows_objects_panel: bpy.props.BoolProperty(
+        name="Windows",
+        description="Toggle visibility of Window meshs",
+        default=True,
+        update=lambda self, context: context.area.tag_redraw(),
+    )
+    show_roofs_objects_panel: bpy.props.BoolProperty(
+        name="Roofs",
+        description="Toggle visibility of Roofs meshs",
+        default=True,
+        update=lambda self, context: context.area.tag_redraw(),
+    )
+    show_ramparts_objects_panel: bpy.props.BoolProperty(
+        name="Ramparts",
+        description="Toggle visibility of Ramparts meshs",
         default=True,
         update=lambda self, context: context.area.tag_redraw(),
     )
@@ -88,6 +129,15 @@ class VRCvvv(bpy.types.AddonPreferences):
         row = layout.row()
         row.prop(self, "show_Export_panel")
         row.prop(self, "show_Extra_objects_panel")
+        row.label(text="wed")
+
+        row = layout.row()
+        row.prop(self, "show_Floors_objects_panel")
+        row.prop(self, "show_roofs_objects_panel")
+        row.prop(self, "show_doors_objects_panel")
+
+        row = layout.row()
+        row.prop(self, "show_windows_objects_panel")
 
         row = layout.row()
         row.operator("wm.url_open", text="Github Page").url = self.documentation_url
@@ -99,188 +149,7 @@ class VRCvvv(bpy.types.AddonPreferences):
         import webbrowser
         webbrowser.open(self.documentation_url)
         return {'FINISHED'}
-
-class OBJECT_OT_add_garage_door_from_blend(Operator):
-    """Garage Door 5X5"""
-    bl_idname = "mesh.add_garage_door_from_blend"
-    bl_label = "Garage Door"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Garage Door"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_door_from_blend(Operator):
-    """Door 5X5"""
-    bl_idname = "mesh.add_door_from_blend"
-    bl_label = "Door"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Door"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
         
-class OBJECT_OT_add_Elevator_Door_from_blend(Operator):
-    """Elevator door 5X5"""
-    bl_idname = "mesh.add_elevator_door_from_blend"
-    bl_label = "Elevator door"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Elevator Door"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_normal_Window_from_blend(Operator):
-    """Normal Window 5X5"""
-    bl_idname = "mesh.add_normal_window_from_blend"
-    bl_label = "A Window"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Window"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-        
-class OBJECT_OT_add_Mall_Window_from_blend(Operator):
-    """Mall Window 5X5"""
-    bl_idname = "mesh.add_mall_window_from_blend"
-    bl_label = "Mall Window"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Mall Window"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_door_frame_from_blend(Operator):
-    """Frame Of DoorWay"""
-    bl_idname = "mesh.add_door_frame_from_blend"
-    bl_label = "Door Frame"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Door Frame"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_door_garage_frame_from_blend(Operator):
-    """Frame Of garage door"""
-    bl_idname = "mesh.add_door_garage_frame_from_blend"
-    bl_label = "Garage Door Frame"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Garage Door Frame"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_window_frame_from_blend(Operator):
-    """Frame Of window"""
-    bl_idname = "mesh.add_window_a_frame_from_blend"
-    bl_label = "Window Frame"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Window Frame"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_Wall_from_blend(Operator):
-    """Wall 5X5"""
-    bl_idname = "mesh.add_normal_wall_from_blend"  # Corrected bl_idname
-    bl_label = "A Normal wall"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Wall"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
- 
-class OBJECT_OT_add_Floor_from_blend(Operator):
-    """Floor 5X5"""
-    bl_idname = "mesh.add_normal_flooor_from_blend"
-    bl_label = "Floor"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Floor"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-        
-class OBJECT_OT_add_Roofup_from_blend(Operator):
-    """Roof 5X5"""
-    bl_idname = "mesh.add_normal_roofup_from_blend"
-    bl_label = "Roof"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Roofup"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_Rooftri_from_blend(Operator):
-    """Roof Triangle 5X5X5"""
-    bl_idname = "mesh.add_normal_rooftri_from_blend"
-    bl_label = "Roof Tri"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Roof Tri"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_cWall_from_blend(Operator):
-    """Corner wall 5X5"""
-    bl_idname = "mesh.add_normal_cwall_from_blend"
-    bl_label = "Corner wall"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Corner Wall"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_Wall_zf_corner_from_blend(Operator):
-    """Wall zf corner 5X5"""
-    bl_idname = "mesh.add_normal_wall_zf_corner_from_blend"
-    bl_label = "Wall zf corner"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Wall_zf_corner"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
         
 class OBJECT_OT_add_Corner_from_blend(Operator):
     """Corner Stairs 180 degree"""
@@ -305,45 +174,6 @@ class OBJECT_OT_add_Stairs_from_blend(Operator):
         addon_dir = os.path.dirname(__file__)
         blend_filename = "U3D.blend"
         object_name = "Stairs"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_rampart_railing_from_blend(Operator):
-    """A fancy rampart with railing"""
-    bl_idname = "mesh.add_rampart_railing_from_blend"
-    bl_label = "Rampart with railing"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Rampart railing"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_l_rampart_stairs_from_blend(Operator):
-    """Rampart, just a Rampart"""
-    bl_idname = "mesh.add_rampart_from_blend"
-    bl_label = "Rampart"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Rampart"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-        
-class OBJECT_OT_add_z_rampart_stairs_from_blend(Operator):
-    """Z rampart stairs 5X5"""
-    bl_idname = "mesh.add_z_rampart_stairs_from_blend"
-    bl_label = "Z Rampart Stairs"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Z Rampart Stairs"
         load_object_from_blend(addon_dir, blend_filename, object_name)
         return {'FINISHED'}
 
@@ -386,55 +216,6 @@ class OBJECT_OT_add_Ramp_from_blend(Operator):
         load_object_from_blend(addon_dir, blend_filename, object_name)
         return {'FINISHED'}
 
-class OBJECT_MT_add_object_menu_doors(Menu):
-    bl_label = "U3 Doors"
-    bl_idname = "OBJECT_MT_add_object_menu_doors"
-
-    def draw(self, context):
-        layout = self.layout
-        layout.operator(OBJECT_OT_add_garage_door_from_blend.bl_idname, icon_value=custom_icons["custom_icon3"].icon_id)
-        layout.operator(OBJECT_OT_add_door_from_blend.bl_idname, icon_value=custom_icons["custom_icon2"].icon_id)
-        layout.operator(OBJECT_OT_add_Elevator_Door_from_blend.bl_idname, icon_value=custom_icons["custom_icon4"].icon_id)
-        layout.operator(OBJECT_OT_add_door_frame_from_blend.bl_idname, icon_value=custom_icons["custom_icon5"].icon_id)
-        layout.operator(OBJECT_OT_add_door_garage_frame_from_blend.bl_idname, icon_value=custom_icons["custom_icon6"].icon_id)
-
-class OBJECT_MT_add_object_menu_windows(Menu):
-    bl_label = "U3 Windows"
-    bl_idname = "OBJECT_MT_add_object_menu_windows"
-
-    def draw(self, context):
-        layout = self.layout
-        layout.operator(OBJECT_OT_add_normal_Window_from_blend.bl_idname, icon_value=custom_icons["custom_icon7"].icon_id)
-        layout.operator(OBJECT_OT_add_Mall_Window_from_blend.bl_idname, icon_value=custom_icons["custom_icon8"].icon_id)
-        layout.operator(OBJECT_OT_add_window_frame_from_blend.bl_idname, icon_value=custom_icons["custom_icon9"].icon_id)
-
-class OBJECT_MT_add_object_menu_walls(Menu):
-    bl_label = "U3 Walls"
-    bl_idname = "OBJECT_MT_add_object_menu_walls"
-
-    def draw(self, context):
-        layout = self.layout
-        layout.operator(OBJECT_OT_add_Wall_from_blend.bl_idname, icon_value=custom_icons["custom_icon10"].icon_id)
-        layout.operator(OBJECT_OT_add_cWall_from_blend.bl_idname, icon_value=custom_icons["custom_icon11"].icon_id)
-        layout.operator(OBJECT_OT_add_Wall_zf_corner_from_blend.bl_idname, icon_value=custom_icons["custom_icon12"].icon_id)
-
-class OBJECT_MT_add_object_menu_floors(Menu):
-    bl_label = "U3 Floors"
-    bl_idname = "OBJECT_MT_add_object_menu_floors"
-
-    def draw(self, context):
-        layout = self.layout
-        layout.operator(OBJECT_OT_add_Floor_from_blend.bl_idname, icon_value=custom_icons["custom_icon13"].icon_id)
-
-class OBJECT_MT_add_object_menu_roofs(Menu):
-    bl_label = "U3 Roofs"
-    bl_idname = "OBJECT_MT_add_object_menu_roofs"
-
-    def draw(self, context):
-        layout = self.layout
-        layout.operator(OBJECT_OT_add_Roofup_from_blend.bl_idname, icon_value=custom_icons["custom_icon14"].icon_id)
-        layout.operator(OBJECT_OT_add_Rooftri_from_blend.bl_idname, icon_value=custom_icons["custom_icon"].icon_id)
-
 class OBJECT_MT_add_object_menu_stairs(Menu):
     bl_label = "U3 Stairs"
     bl_idname = "OBJECT_MT_add_object_menu_stairs"
@@ -447,28 +228,19 @@ class OBJECT_MT_add_object_menu_stairs(Menu):
         layout.operator(OBJECT_OT_add_LongRamp_from_blend.bl_idname, icon_value=custom_icons["custom_icon"].icon_id)
         layout.operator(OBJECT_OT_add_LongStairs_from_blend.bl_idname, icon_value=custom_icons["custom_icon"].icon_id)
 
-class OBJECT_MT_add_object_menu_ramparts(Menu):
-    bl_label = "U3 Ramparts"
-    bl_idname = "OBJECT_MT_add_object_menu_ramparts"
-
-    def draw(self, context):
-        layout = self.layout
-        layout.operator(OBJECT_OT_add_rampart_railing_from_blend.bl_idname, icon_value=custom_icons["custom_icon"].icon_id)
-        layout.operator(OBJECT_OT_add_l_rampart_stairs_from_blend.bl_idname, icon_value=custom_icons["custom_icon"].icon_id)
-        layout.operator(OBJECT_OT_add_z_rampart_stairs_from_blend.bl_idname, icon_value=custom_icons["custom_icon"].icon_id)
 
 def add_object_menu(self, context):
     layout = self.layout
-    layout.menu("OBJECT_MT_add_object_menu_doors", icon_value=custom_icons["custom_icon2"].icon_id)
-    layout.menu("OBJECT_MT_add_object_menu_windows", icon_value=custom_icons["custom_icon7"].icon_id)
-    layout.menu("OBJECT_MT_add_object_menu_walls", icon_value=custom_icons["custom_icon10"].icon_id)
-    layout.menu("OBJECT_MT_add_object_menu_floors", icon_value=custom_icons["custom_icon13"].icon_id)
-    layout.menu("OBJECT_MT_add_object_menu_roofs", icon_value=custom_icons["custom_icon14"].icon_id)
     layout.menu("OBJECT_MT_add_object_menu_stairs", icon_value=custom_icons["custom_icon15"].icon_id)
-    layout.menu("OBJECT_MT_add_object_menu_ramparts", icon_value=custom_icons["custom_icon"].icon_id)
 
 def register():
     exy.register()
+    Floors.register()
+    Walls.register()
+    Doors.register()
+    Windows.register()
+    Roofs.register()
+    Ramparts.register()
     exy_extra.register()
     global custom_icons
     custom_icons = previews.new()
@@ -523,70 +295,30 @@ def register():
     bpy.utils.register_class(OBJECT_OT_add_LongRamp_from_blend)
     bpy.utils.register_class(OBJECT_OT_add_Ramp_from_blend)
     bpy.utils.register_class(OBJECT_OT_add_LongStairs_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_garage_door_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_door_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_Elevator_Door_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_door_frame_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_door_garage_frame_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_normal_Window_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_Mall_Window_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_window_frame_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_Wall_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_cWall_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_Wall_zf_corner_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_Floor_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_Roofup_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_Rooftri_from_blend)
     bpy.utils.register_class(OBJECT_OT_add_Corner_from_blend)
     bpy.utils.register_class(OBJECT_OT_add_Stairs_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_rampart_railing_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_l_rampart_stairs_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_z_rampart_stairs_from_blend)
-    bpy.utils.register_class(OBJECT_MT_add_object_menu_doors)
-    bpy.utils.register_class(OBJECT_MT_add_object_menu_windows)
-    bpy.utils.register_class(OBJECT_MT_add_object_menu_walls)
-    bpy.utils.register_class(OBJECT_MT_add_object_menu_floors)
-    bpy.utils.register_class(OBJECT_MT_add_object_menu_roofs)
     bpy.utils.register_class(OBJECT_MT_add_object_menu_stairs)
-    bpy.utils.register_class(OBJECT_MT_add_object_menu_ramparts)
-    bpy.utils.register_class(VRCvvv)
+    bpy.utils.register_class(Settingsofwed)
     
     bpy.types.VIEW3D_MT_mesh_add.append(add_object_menu)
     
 def unregister():
     exy.unregister()
     exy_extra.unregister()
+    Floors.unregister()
+    Walls.register()
+    Doors.unregister()
+    Windows.unregister()
+    Roofs.unregister()
+    Ramparts.unregister()
     global custom_icons
-    bpy.utils.unregister_class(VRCvvv)
+    bpy.utils.unregister_class(Settingsofwed)
     bpy.utils.unregister_class(OBJECT_OT_add_LongRamp_from_blend)
     bpy.utils.unregister_class(OBJECT_OT_add_Ramp_from_blend)
     bpy.utils.unregister_class(OBJECT_OT_add_LongStairs_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_garage_door_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_door_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_Elevator_Door_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_door_frame_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_door_garage_frame_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_normal_Window_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_Mall_Window_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_window_frame_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_Wall_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_cWall_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_Wall_zf_corner_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_Floor_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_Roofup_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_Rooftri_from_blend)
     bpy.utils.unregister_class(OBJECT_OT_add_Corner_from_blend)
     bpy.utils.unregister_class(OBJECT_OT_add_Stairs_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_rampart_railing_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_l_rampart_stairs_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_z_rampart_stairs_from_blend)
-    bpy.utils.unregister_class(OBJECT_MT_add_object_menu_doors)
-    bpy.utils.unregister_class(OBJECT_MT_add_object_menu_windows)
-    bpy.utils.unregister_class(OBJECT_MT_add_object_menu_walls)
-    bpy.utils.unregister_class(OBJECT_MT_add_object_menu_floors)
-    bpy.utils.unregister_class(OBJECT_MT_add_object_menu_roofs)
     bpy.utils.unregister_class(OBJECT_MT_add_object_menu_stairs)
-    bpy.utils.unregister_class(OBJECT_MT_add_object_menu_ramparts)
 
     bpy.types.VIEW3D_MT_mesh_add.remove(add_object_menu)
 
