@@ -15,7 +15,7 @@ class OBJECT_OT_add_rampart_railing_from_blend(Operator):
     @classmethod
     def poll(cls, context):
         preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
-        return preferences.show_Floors_objects_panel
+        return preferences.show_ramparts_objects_panel
     def execute(self, context):
         addon_dir = os.path.dirname(__file__)
         blend_filename = "U3D.blend"
@@ -28,7 +28,10 @@ class OBJECT_OT_add_l_rampart_stairs_from_blend(Operator):
     bl_idname = "mesh.add_rampart_from_blend"
     bl_label = "Rampart"
     bl_options = {'REGISTER', 'UNDO'}
-
+    @classmethod
+    def poll(cls, context):
+        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        return preferences.show_ramparts_objects_panel
     def execute(self, context):
         addon_dir = os.path.dirname(__file__)
         blend_filename = "U3D.blend"
@@ -41,7 +44,10 @@ class OBJECT_OT_add_z_rampart_stairs_from_blend(Operator):
     bl_idname = "mesh.add_z_rampart_stairs_from_blend"
     bl_label = "Z Rampart Stairs"
     bl_options = {'REGISTER', 'UNDO'}
-
+    @classmethod
+    def poll(cls, context):
+        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        return preferences.show_ramparts_objects_panel
     def execute(self, context):
         addon_dir = os.path.dirname(__file__)
         blend_filename = "U3D.blend"
@@ -52,7 +58,10 @@ class OBJECT_OT_add_z_rampart_stairs_from_blend(Operator):
 class OBJECT_MT_add_object_menu_ramparts(Menu):
     bl_label = "U3 Ramparts"
     bl_idname = "OBJECT_MT_add_object_menu_ramparts"
-
+    @classmethod
+    def poll(cls, context):
+        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        return preferences.show_ramparts_objects_panel
     def draw(self, context):
         layout = self.layout
         layout.operator(OBJECT_OT_add_rampart_railing_from_blend.bl_idname, icon_value=custom_icons["custom_icon"].icon_id)

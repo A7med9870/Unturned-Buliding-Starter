@@ -25,6 +25,7 @@ from . import Doors
 from . import Windows
 from . import Roofs
 from . import Ramparts
+from . import Stairs
 # Directory for the add-on
 icon_dir = os.path.join(os.path.dirname(__file__), "icons")
 
@@ -119,6 +120,12 @@ class Settingsofwed(bpy.types.AddonPreferences):
         default=True,
         update=lambda self, context: context.area.tag_redraw(),
     )
+    show_stairs_objects_panel: bpy.props.BoolProperty(
+        name="Stairs",
+        description="Toggle visibility of Stairs meshs",
+        default=True,
+        update=lambda self, context: context.area.tag_redraw(),
+    )
 
     def draw(self, context):
         layout = self.layout
@@ -138,6 +145,8 @@ class Settingsofwed(bpy.types.AddonPreferences):
 
         row = layout.row()
         row.prop(self, "show_windows_objects_panel")
+        row.prop(self, "show_ramparts_objects_panel")
+        row.prop(self, "show_stairs_objects_panel")
 
         row = layout.row()
         row.operator("wm.url_open", text="Github Page").url = self.documentation_url
@@ -149,85 +158,6 @@ class Settingsofwed(bpy.types.AddonPreferences):
         import webbrowser
         webbrowser.open(self.documentation_url)
         return {'FINISHED'}
-        
-        
-class OBJECT_OT_add_Corner_from_blend(Operator):
-    """Corner Stairs 180 degree"""
-    bl_idname = "mesh.add_corner_stairs_from_blend"
-    bl_label = "Corner Stairs"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Corner Stairs"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-        
-class OBJECT_OT_add_Stairs_from_blend(Operator):
-    """Stairs 5X5"""
-    bl_idname = "mesh.add_normal_stairs_from_blend"
-    bl_label = "Stairs"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Stairs"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_LongStairs_from_blend(Operator):
-    """Long Stairs 5X10"""
-    bl_idname = "mesh.add_long_stairs_from_blend"
-    bl_label = "Long Stairs"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "LongStairs"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_LongRamp_from_blend(Operator):
-    """Long Ramp 5X10"""
-    bl_idname = "mesh.add_long_ramp_from_blend"
-    bl_label = "Long Ramp"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "LongRamp"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_OT_add_Ramp_from_blend(Operator):
-    """Ramp 5X5"""
-    bl_idname = "mesh.add_normal_ramp_from_blend"
-    bl_label = "Ramp"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Ramp"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
-        return {'FINISHED'}
-
-class OBJECT_MT_add_object_menu_stairs(Menu):
-    bl_label = "U3 Stairs"
-    bl_idname = "OBJECT_MT_add_object_menu_stairs"
-
-    def draw(self, context):
-        layout = self.layout
-        layout.operator(OBJECT_OT_add_Corner_from_blend.bl_idname, icon_value=custom_icons["custom_icon16"].icon_id)
-        layout.operator(OBJECT_OT_add_Stairs_from_blend.bl_idname, icon_value=custom_icons["custom_icon15"].icon_id)
-        layout.operator(OBJECT_OT_add_Ramp_from_blend.bl_idname, icon_value=custom_icons["custom_icon"].icon_id)
-        layout.operator(OBJECT_OT_add_LongRamp_from_blend.bl_idname, icon_value=custom_icons["custom_icon"].icon_id)
-        layout.operator(OBJECT_OT_add_LongStairs_from_blend.bl_idname, icon_value=custom_icons["custom_icon"].icon_id)
-
 
 def add_object_menu(self, context):
     layout = self.layout
@@ -241,6 +171,7 @@ def register():
     Windows.register()
     Roofs.register()
     Ramparts.register()
+    Stairs.register()
     exy_extra.register()
     global custom_icons
     custom_icons = previews.new()
@@ -291,13 +222,7 @@ def register():
     
     icon_file16 = os.path.join(os.path.dirname(__file__), "icons", "Corner Stairs.png")
     custom_icons.load("custom_icon16", icon_file16, 'IMAGE')
-    
-    bpy.utils.register_class(OBJECT_OT_add_LongRamp_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_Ramp_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_LongStairs_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_Corner_from_blend)
-    bpy.utils.register_class(OBJECT_OT_add_Stairs_from_blend)
-    bpy.utils.register_class(OBJECT_MT_add_object_menu_stairs)
+
     bpy.utils.register_class(Settingsofwed)
     
     bpy.types.VIEW3D_MT_mesh_add.append(add_object_menu)
@@ -311,14 +236,9 @@ def unregister():
     Windows.unregister()
     Roofs.unregister()
     Ramparts.unregister()
+    Stairs.unregister()
     global custom_icons
     bpy.utils.unregister_class(Settingsofwed)
-    bpy.utils.unregister_class(OBJECT_OT_add_LongRamp_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_Ramp_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_LongStairs_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_Corner_from_blend)
-    bpy.utils.unregister_class(OBJECT_OT_add_Stairs_from_blend)
-    bpy.utils.unregister_class(OBJECT_MT_add_object_menu_stairs)
 
     bpy.types.VIEW3D_MT_mesh_add.remove(add_object_menu)
 
