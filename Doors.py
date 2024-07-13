@@ -13,7 +13,7 @@ class OBJECT_OT_add_garage_door_from_blend(Operator):
     bl_options = {'REGISTER', 'UNDO'}
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_doors_objects_panel
 
     def execute(self, context):
@@ -30,7 +30,7 @@ class OBJECT_OT_add_door_from_blend(Operator):
     bl_options = {'REGISTER', 'UNDO'}
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_doors_objects_panel
     def execute(self, context):
         addon_dir = os.path.dirname(__file__)
@@ -46,7 +46,7 @@ class OBJECT_OT_add_Elevator_Door_from_blend(Operator):
     bl_options = {'REGISTER', 'UNDO'}
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_doors_objects_panel
     def execute(self, context):
         addon_dir = os.path.dirname(__file__)
@@ -62,7 +62,7 @@ class OBJECT_OT_add_door_frame_from_blend(Operator):
     bl_options = {'REGISTER', 'UNDO'}
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_doors_objects_panel
     def execute(self, context):
         addon_dir = os.path.dirname(__file__)
@@ -78,7 +78,7 @@ class OBJECT_OT_add_door_garage_frame_from_blend(Operator):
     bl_options = {'REGISTER', 'UNDO'}
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_doors_objects_panel
     def execute(self, context):
         addon_dir = os.path.dirname(__file__)
@@ -94,7 +94,7 @@ class OBJECT_OT_add_door_eve_frame_from_blend(Operator):
     bl_options = {'REGISTER', 'UNDO'}
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_doors_objects_panel
     def execute(self, context):
         addon_dir = os.path.dirname(__file__)
@@ -108,7 +108,7 @@ class OBJECT_MT_add_object_menu_doors(Menu):
     bl_idname = "OBJECT_MT_add_object_menu_doors"
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_doors_objects_panel
     def draw(self, context):
         layout = self.layout
@@ -125,7 +125,7 @@ def load_object_from_blend(addon_dir, blend_filename, object_name):
     with bpy.data.libraries.load(filepath, link=False) as (data_from, data_to):
         if object_name in data_from.objects:
             data_to.objects.append(object_name)
-    
+
     for obj in data_to.objects:
         if obj.name == object_name:
             obj.name = object_name + "_imported"  # Make the name unique
@@ -157,16 +157,16 @@ def register():
     custom_icons = previews.new()
     icon_file = os.path.join(os.path.dirname(__file__), "icons", "door.png")
     custom_icons.load("custom_icon", icon_file, 'IMAGE')
-    
+
     icon_file2 = os.path.join(os.path.dirname(__file__), "icons", "garage_door.png")
     custom_icons.load("custom_icon2", icon_file2, 'IMAGE')
-    
+
     icon_file3 = os.path.join(os.path.dirname(__file__), "icons", "Elevator Door.png")
     custom_icons.load("custom_icon3", icon_file3, 'IMAGE')
-    
+
     icon_file4 = os.path.join(os.path.dirname(__file__), "icons", "Door Frame.png")
     custom_icons.load("custom_icon4", icon_file4, 'IMAGE')
-    
+
     icon_file5 = os.path.join(os.path.dirname(__file__), "icons", "Garage Door Frame.png")
     custom_icons.load("custom_icon5", icon_file5, 'IMAGE')
 

@@ -12,10 +12,10 @@ class OBJECT_OT_add_normal_Window_from_blend(Operator):
     bl_idname = "mesh.add_normal_window_from_blend"
     bl_label = "A Window"
     bl_options = {'REGISTER', 'UNDO'}
-    
+
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_windows_objects_panel
 
     def execute(self, context):
@@ -192,11 +192,11 @@ class OBJECT_MT_add_object_menu_windows(Menu):
         layout.operator(OBJECT_OT_add_Small_Window_from_blend.bl_idname, icon_value=custom_icons["custom_icon2"].icon_id)
         layout.operator(OBJECT_OT_add_Window_Circle_t_from_blend.bl_idname, icon_value=custom_icons["custom_icon2"].icon_id)
         layout.operator(OBJECT_OT_add_Window_Vent_from_blend.bl_idname, icon_value=custom_icons["custom_icon2"].icon_id)
-        
+
         layout.operator(OBJECT_OT_add_window_frame_from_blend.bl_idname, icon_value=custom_icons["custom_icon3"].icon_id)
 
         layout.operator(OBJECT_OT_add_wide_Window_frame_from_blend.bl_idname, icon_value=custom_icons["custom_icon2"].icon_id)
-        
+
         layout.operator(OBJECT_OT_add_Eastern_Window_Frame_from_blend.bl_idname, icon_value=custom_icons["custom_icon2"].icon_id)
         layout.operator(OBJECT_OT_add_Small_Window_frame_from_blend.bl_idname, icon_value=custom_icons["custom_icon3"].icon_id)
         layout.operator(OBJECT_OT_add_Window_Circle_frame_from_blend.bl_idname, icon_value=custom_icons["custom_icon3"].icon_id)
@@ -210,7 +210,7 @@ def load_object_from_blend(addon_dir, blend_filename, object_name):
     with bpy.data.libraries.load(filepath, link=False) as (data_from, data_to):
         if object_name in data_from.objects:
             data_to.objects.append(object_name)
-    
+
     for obj in data_to.objects:
         if obj.name == object_name:
             obj.name = object_name + "_imported"  # Make the name unique
@@ -248,10 +248,10 @@ def register():
     custom_icons = previews.new()
     icon_file = os.path.join(os.path.dirname(__file__), "icons", "Window.png")
     custom_icons.load("custom_icon", icon_file, 'IMAGE')
-    
+
     icon_file2 = os.path.join(os.path.dirname(__file__), "icons", "Mall Window.png")
     custom_icons.load("custom_icon2", icon_file2, 'IMAGE')
-    
+
     icon_file3 = os.path.join(os.path.dirname(__file__), "icons", "WindowFrame.png")
     custom_icons.load("custom_icon3", icon_file3, 'IMAGE')
 

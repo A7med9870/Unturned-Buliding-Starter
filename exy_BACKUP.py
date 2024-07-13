@@ -36,7 +36,7 @@ class VIEW3D_PT_PanelExportAll(bpy.types.Panel):
 
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_Export_panel
     def draw(self, context):
         layout = self.layout
@@ -82,8 +82,8 @@ class MyUnitScale(bpy.types.Operator):
     """Sets the scale of world to correct scale to export to unreal"""
     bl_idname = "my_operator.my_unitscale_operator"
     bl_label = "Set Unit Scale"
-    
-    def execute(self, context):    
+
+    def execute(self, context):
         bpy.context.scene.unit_settings.scale_length = 0.01
         return {'FINISHED'}
 
@@ -143,7 +143,7 @@ def export_combined(export_folder, suffix=''):
         obj.location = orig_locs.pop(0)
         if suffix != '':
             obj.name = obj.name[:-len(suffix)]
-            
+
 def export_combinedZero(export_folder, suffix=''):
     is_origin = bpy.context.scene.my_tool.apply_origin
     objects = bpy.context.selected_objects

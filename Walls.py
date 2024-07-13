@@ -14,7 +14,7 @@ class OBJECT_OT_add_Wall_from_blend(Operator):
 
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_Walls_objects_panel
 
     def execute(self, context):
@@ -32,7 +32,7 @@ class OBJECT_OT_add_cWall_from_blend(Operator):
 
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_Walls_objects_panel
     def execute(self, context):
         addon_dir = os.path.dirname(__file__)
@@ -48,7 +48,7 @@ class OBJECT_OT_add_Wall_zf_corner_from_blend(Operator):
     bl_options = {'REGISTER', 'UNDO'}
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_Walls_objects_panel
     def execute(self, context):
         addon_dir = os.path.dirname(__file__)
@@ -62,7 +62,7 @@ class OBJECT_MT_add_object_menu_walls(Menu):
     bl_idname = "OBJECT_MT_add_object_menu_walls"
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_Walls_objects_panel
     def draw(self, context):
         layout = self.layout
@@ -75,7 +75,7 @@ def load_object_from_blend(addon_dir, blend_filename, object_name):
     with bpy.data.libraries.load(filepath, link=False) as (data_from, data_to):
         if object_name in data_from.objects:
             data_to.objects.append(object_name)
-    
+
     for obj in data_to.objects:
         if obj.name == object_name:
             obj.name = object_name + "_imported"  # Make the name unique
@@ -107,7 +107,7 @@ def register():
 
     icon_file2 = os.path.join(os.path.dirname(__file__), "icons", "Corner_Wall.png")
     custom_icons.load("custom_icon2", icon_file2, 'IMAGE')
-    
+
     icon_file3 = os.path.join(os.path.dirname(__file__), "icons", "Wall_zf_corner.png")
     custom_icons.load("custom_icon3", icon_file3, 'IMAGE')
 

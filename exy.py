@@ -30,7 +30,7 @@ class hamada_unturnned_PanelExportAll(bpy.types.Panel):
 
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_Export_panel
     def draw(self, context):
         layout = self.layout

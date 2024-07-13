@@ -37,7 +37,7 @@ def load_object_from_blend(addon_dir, blend_filename, object_name):
     with bpy.data.libraries.load(filepath, link=False) as (data_from, data_to):
         if object_name in data_from.objects:
             data_to.objects.append(object_name)
-    
+
     for obj in data_to.objects:
         if obj.name == object_name:
             obj.name = object_name + "_imported"  # Make the name unique
@@ -46,7 +46,7 @@ def load_object_from_blend(addon_dir, blend_filename, object_name):
             obj.select_set(True)
             cursor_location = bpy.context.scene.cursor.location
             obj.location = cursor_location
-            
+
             break
 #options menu
 class Settingsofwed(bpy.types.AddonPreferences):
@@ -174,7 +174,7 @@ class OBJECT_OT_toggle_geo_test(Operator):
     bl_label = "Toggle Geo Test"
 
     def execute(self, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         preferences.Geo_test = not preferences.Geo_test
         self.report({'INFO'}, f"Geo Test set to {preferences.Geo_test}")
         return {'FINISHED'}
@@ -197,56 +197,56 @@ def register():
     custom_icons = previews.new()
     icon_file = os.path.join(os.path.dirname(__file__), "icons", "custom_icon.png")
     custom_icons.load("custom_icon", icon_file, 'IMAGE')
-    
+
     icon_file2 = os.path.join(os.path.dirname(__file__), "icons", "door.png")
     custom_icons.load("custom_icon2", icon_file2, 'IMAGE')
-    
+
     icon_file3 = os.path.join(os.path.dirname(__file__), "icons", "garage_door.png")
     custom_icons.load("custom_icon3", icon_file3, 'IMAGE')
-    
+
     icon_file4 = os.path.join(os.path.dirname(__file__), "icons", "Elevator Door.png")
     custom_icons.load("custom_icon4", icon_file4, 'IMAGE')
-    
+
     icon_file5 = os.path.join(os.path.dirname(__file__), "icons", "Door Frame.png")
     custom_icons.load("custom_icon5", icon_file5, 'IMAGE')
-    
+
     icon_file6 = os.path.join(os.path.dirname(__file__), "icons", "Garage Door Frame.png")
     custom_icons.load("custom_icon6", icon_file6, 'IMAGE')
-    
+
     icon_file7 = os.path.join(os.path.dirname(__file__), "icons", "Window.png")
     custom_icons.load("custom_icon7", icon_file7, 'IMAGE')
-    
+
     icon_file8 = os.path.join(os.path.dirname(__file__), "icons", "Mall Window.png")
     custom_icons.load("custom_icon8", icon_file8, 'IMAGE')
-    
+
     icon_file9 = os.path.join(os.path.dirname(__file__), "icons", "WindowFrame.png")
     custom_icons.load("custom_icon9", icon_file9, 'IMAGE')
-    
+
     icon_file10 = os.path.join(os.path.dirname(__file__), "icons", "Wall.png")
     custom_icons.load("custom_icon10", icon_file10, 'IMAGE')
-    
+
     icon_file11 = os.path.join(os.path.dirname(__file__), "icons", "Corner Wall.png")
     custom_icons.load("custom_icon11", icon_file11, 'IMAGE')
-    
+
     icon_file12 = os.path.join(os.path.dirname(__file__), "icons", "Wall_zf_corner.png")
     custom_icons.load("custom_icon12", icon_file12, 'IMAGE')
-    
+
     icon_file13 = os.path.join(os.path.dirname(__file__), "icons", "Floor.png")
     custom_icons.load("custom_icon13", icon_file13, 'IMAGE')
-    
+
     icon_file14 = os.path.join(os.path.dirname(__file__), "icons", "Roofup.png")
     custom_icons.load("custom_icon14", icon_file14, 'IMAGE')
-    
+
     icon_file15 = os.path.join(os.path.dirname(__file__), "icons", "Stairs.png")
     custom_icons.load("custom_icon15", icon_file15, 'IMAGE')
-    
+
     icon_file16 = os.path.join(os.path.dirname(__file__), "icons", "Corner Stairs.png")
     custom_icons.load("custom_icon16", icon_file16, 'IMAGE')
 
     bpy.utils.register_class(Settingsofwed)
-    
+
     bpy.types.VIEW3D_MT_mesh_add.append(add_object_menu)
-    
+
 def unregister():
     exy.unregister()
     exy_extra.unregister()

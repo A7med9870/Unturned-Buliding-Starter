@@ -1,6 +1,6 @@
 Insipered by
 I wanted to make my own blender addon to help with the creation procces of new bulidings
-I had a blender file that contained moulder objects that get used for buildngs; unforuntly i havent been able to pin point who exactly created the file
+I had a blender file that contained moulder objects that get used for buildngs; sadly i havent been able to pin point who exactly created the file
 this addon uses the models he/she made years ago, with little adjustments for 5x5 countiby
 The way it works, it looks at a blender file inside the addon difercty, when you try to add a new mesh
 it will show a new list of objects you could add to your scene
@@ -11,4 +11,10 @@ if there is some requests for more objects to be ready for adding to blender, th
 I don't think it will help veterens with blender much, escpily shurtcuts wizards
 but i think it can help new users getting their new buildings modeled quicker with this addon
 
-cridit goes to , and the person behind the models
+the credits goes to , and the person behind the models
+
+//
+
+after reaching out to "" (forget his name atm of writing this note)
+he said he got them from someone else
+but that else, has not said if he made them or not

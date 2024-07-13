@@ -14,7 +14,7 @@ class OBJECT_OT_add_Wide_window(Operator):
     bl_options = {'REGISTER', 'UNDO'}
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_Extra_objects_panel
 
     def execute(self, context):
@@ -29,7 +29,7 @@ class OBJECT_MT_add_object_menu_extra(Menu):
     bl_idname = "OBJECT_MT_add_object_menu_extra"
     @classmethod
     def poll(cls, context):
-        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
         return preferences.show_Extra_objects_panel
 
     def draw(self, context):
@@ -41,7 +41,7 @@ def load_object_from_blend(addon_dir, blend_filename, object_name):
     with bpy.data.libraries.load(filepath, link=False) as (data_from, data_to):
         if object_name in data_from.objects:
             data_to.objects.append(object_name)
-    
+
     for obj in data_to.objects:
         if obj.name == object_name:
             obj.name = object_name + "_imported"  # Make the name unique
@@ -50,7 +50,7 @@ def load_object_from_blend(addon_dir, blend_filename, object_name):
             obj.select_set(True)
             cursor_location = bpy.context.scene.cursor.location
             obj.location = cursor_location
-            
+
             break
 
 def add_object_menu(self, context):
