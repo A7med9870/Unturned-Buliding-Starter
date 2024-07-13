@@ -55,7 +55,7 @@ class Settingsofwed(bpy.types.AddonPreferences):
     documentation_url: bpy.props.StringProperty(
         name="Documentation URL",
         description="URL for the addon documentation",
-        default="https://github.com/A7med9870/Blender-Car-Streamliner",
+        default="https://github.com/A7med9870/Unturned-Buliding-Starter",
     )
     YT_url: bpy.props.StringProperty(
         name="YT URL",
@@ -75,7 +75,7 @@ class Settingsofwed(bpy.types.AddonPreferences):
     show_Export_panel: bpy.props.BoolProperty(
         name="Show Export to FBX Panel",
         description="Toggle visibility of the Export to FBX Panel",
-        default=True,
+        default=False,
         update=lambda self, context: context.area.tag_redraw(),
     )
     show_Extra_objects_panel: bpy.props.BoolProperty(
@@ -88,6 +88,12 @@ class Settingsofwed(bpy.types.AddonPreferences):
         name="Floors",
         description="Toggle visibility of Floors meshs",
         default=True,
+        update=lambda self, context: context.area.tag_redraw(),
+    )
+    Geo_test: bpy.props.BoolProperty(
+        name="Don't Center Geometery frame",
+        description="Will import frames with the origin being the center, turning it on; will make frame meshes show up in the center of the cursor",
+        default=False,
         update=lambda self, context: context.area.tag_redraw(),
     )
     show_Walls_objects_panel: bpy.props.BoolProperty(
@@ -149,6 +155,9 @@ class Settingsofwed(bpy.types.AddonPreferences):
         row.prop(self, "show_stairs_objects_panel")
 
         row = layout.row()
+        row.prop(self, "Geo_test")
+
+        row = layout.row()
         row.operator("wm.url_open", text="Github Page").url = self.documentation_url
         row.operator("wm.url_open", text="Creator's Youtube").url = self.YT_url
         row.operator("wm.url_open", text="Creator's Instagram").url = self.IG_url
@@ -159,9 +168,19 @@ class Settingsofwed(bpy.types.AddonPreferences):
         webbrowser.open(self.documentation_url)
         return {'FINISHED'}
 
+class OBJECT_OT_toggle_geo_test(Operator):
+    """Toggle Geo Test"""
+    bl_idname = "wm.toggle_geo_test"
+    bl_label = "Toggle Geo Test"
+
+    def execute(self, context):
+        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        preferences.Geo_test = not preferences.Geo_test
+        self.report({'INFO'}, f"Geo Test set to {preferences.Geo_test}")
+        return {'FINISHED'}
+
 def add_object_menu(self, context):
     layout = self.layout
-    layout.menu("OBJECT_MT_add_object_menu_stairs", icon_value=custom_icons["custom_icon15"].icon_id)
 
 def register():
     exy.register()
@@ -173,6 +192,7 @@ def register():
     Ramparts.register()
     Stairs.register()
     exy_extra.register()
+    bpy.utils.register_class(OBJECT_OT_toggle_geo_test)
     global custom_icons
     custom_icons = previews.new()
     icon_file = os.path.join(os.path.dirname(__file__), "icons", "custom_icon.png")
@@ -239,6 +259,7 @@ def unregister():
     Stairs.unregister()
     global custom_icons
     bpy.utils.unregister_class(Settingsofwed)
+    bpy.utils.unregister_class(OBJECT_OT_toggle_geo_test)
 
     bpy.types.VIEW3D_MT_mesh_add.remove(add_object_menu)
 

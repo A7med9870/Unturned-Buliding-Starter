@@ -87,6 +87,22 @@ class OBJECT_OT_add_door_garage_frame_from_blend(Operator):
         load_object_from_blend(addon_dir, blend_filename, object_name)
         return {'FINISHED'}
 
+class OBJECT_OT_add_door_eve_frame_from_blend(Operator):
+    """Frame Of eve door"""
+    bl_idname = "mesh.add_door_eve_frame_from_blend"
+    bl_label = "Elevator Door Frame"
+    bl_options = {'REGISTER', 'UNDO'}
+    @classmethod
+    def poll(cls, context):
+        preferences = bpy.context.preferences.addons['NewObjectTestKalb'].preferences
+        return preferences.show_doors_objects_panel
+    def execute(self, context):
+        addon_dir = os.path.dirname(__file__)
+        blend_filename = "U3D.blend"
+        object_name = "Elevator Door Frame"
+        load_object_from_blend(addon_dir, blend_filename, object_name)
+        return {'FINISHED'}
+
 class OBJECT_MT_add_object_menu_doors(Menu):
     bl_label = "U3 Doors"
     bl_idname = "OBJECT_MT_add_object_menu_doors"
@@ -101,6 +117,8 @@ class OBJECT_MT_add_object_menu_doors(Menu):
         layout.operator(OBJECT_OT_add_Elevator_Door_from_blend.bl_idname, icon_value=custom_icons["custom_icon4"].icon_id)
         layout.operator(OBJECT_OT_add_door_frame_from_blend.bl_idname, icon_value=custom_icons["custom_icon5"].icon_id)
         layout.operator(OBJECT_OT_add_door_garage_frame_from_blend.bl_idname, icon_value=custom_icons["custom_icon6"].icon_id)
+        layout.operator(OBJECT_OT_add_door_eve_frame_from_blend.bl_idname, icon_value=custom_icons["custom_icon6"].icon_id)
+
 
 def load_object_from_blend(addon_dir, blend_filename, object_name):
     filepath = os.path.join(addon_dir, blend_filename)
@@ -128,7 +146,8 @@ classes = (
     OBJECT_OT_add_Elevator_Door_from_blend,
     OBJECT_OT_add_door_frame_from_blend,
     OBJECT_OT_add_door_garage_frame_from_blend,
-    OBJECT_MT_add_object_menu_doors
+    OBJECT_MT_add_object_menu_doors,
+    OBJECT_OT_add_door_eve_frame_from_blend
 )
 
 def register():

@@ -20,7 +20,7 @@ class MySettings(PropertyGroup):
         default=False
     )
 
-class VIEW3D_PT_PanelExportAll(bpy.types.Panel):
+class hamada_unturnned_PanelExportAll(bpy.types.Panel):
     bl_label = "Export panel"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
@@ -43,7 +43,7 @@ class VIEW3D_PT_PanelExportAll(bpy.types.Panel):
         layout.operator("myops.combined_exporter", text='Export Combined', icon='TRIA_RIGHT')
         #layout.operator("myops.combined_export_zero_pos", text='Export Combined at Zero Position', icon='TRIA_RIGHT')
 
-class OBJECT_OT_BatchExport(bpy.types.Operator):
+class hamada_unturnned_BatchExportE(bpy.types.Operator):
     bl_idname = "myops.batch_exporter"
     bl_label = "Export Selected"
     bl_options = {"UNDO"}
@@ -52,11 +52,11 @@ class OBJECT_OT_BatchExport(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        export_all(context.scene.my_tool.path)
+        hamada_unturnned_export_all(context.scene.my_tool.path)
         self.report({'INFO'}, 'ExportedBatchExport')
         return {'FINISHED'}
 
-class OBJECT_OT_ExportZeroPos(bpy.types.Operator):
+class hamada_unturnned_ExportZeroPosE(bpy.types.Operator):
     bl_idname = "myops.export_zero_pos"
     bl_label = "Export Selected at Zero Position"
     bl_options = {"UNDO"}
@@ -65,20 +65,20 @@ class OBJECT_OT_ExportZeroPos(bpy.types.Operator):
         objects = context.selected_objects
         for obj in objects:
             obj.location = (0, 0, 0)
-        export_all(context.scene.my_tool.path)
+        hamada_unturnned_export_all(context.scene.my_tool.path)
         self.report({'INFO'}, 'Exported at Zero Position')
         return {'FINISHED'}
 
-class MyUnitScale(bpy.types.Operator):
+class hamada_unturnned_MyUnitScale(bpy.types.Operator):
     """Sets the scale of world to correct scale to export to unreal"""
     bl_idname = "my_operator.my_unitscale_operator"
     bl_label = "Set Unit Scale"
-    
-    def execute(self, context):    
+
+    def execute(self, context):
         bpy.context.scene.unit_settings.scale_length = 0.01
         return {'FINISHED'}
 
-class OBJECT_OT_CombinedExporter(bpy.types.Operator):
+class hamada_unturnned_CombinedExporterE(bpy.types.Operator):
     bl_idname = "myops.combined_exporter"
     bl_label = "Export Combined"
     bl_options = {"UNDO"}
@@ -87,11 +87,11 @@ class OBJECT_OT_CombinedExporter(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        export_combined(context.scene.my_tool.path)
+        hamada_unturnned_export_combined(context.scene.my_tool.path)
         self.report({'INFO'}, 'Exported Combined')
         return {'FINISHED'}
 
-class OBJECT_OT_CombinedExportZeroPos(bpy.types.Operator):
+class Combinedhamada_unturnned_ExportZeroPosE(bpy.types.Operator):
     bl_idname = "myops.combined_export_zero_pos"
     bl_label = "Export Combined at Zero Position"
     bl_options = {"UNDO"}
@@ -100,11 +100,11 @@ class OBJECT_OT_CombinedExportZeroPos(bpy.types.Operator):
         objects = context.selected_objects
         for obj in objects:
             obj.location = (0, 0, 0)
-        export_combined(context.scene.my_tool.path)
+        hamada_unturnned_export_combined(context.scene.my_tool.path)
         self.report({'INFO'}, 'Exported Combined at Zero Position')
         return {'FINISHED'}
 
-def export_combined(export_folder):
+def hamada_unturnned_export_combined(export_folder):
     objects = bpy.context.selected_objectsX
     orig_locs = []
 
@@ -118,8 +118,8 @@ def export_combined(export_folder):
     for obj in objects:
         obj.location = orig_locs.pop(0)
 
-            
-def export_combinedZero(export_folder):
+
+def hamada_unturnned_export_combinedZero(export_folder):
     objects = bpy.context.selected_objects
     orig_locs = []
 
@@ -134,7 +134,7 @@ def export_combinedZero(export_folder):
     for obj in objects:
         obj.location = orig_locs.pop(0)
 
-def export_all(export_folder):
+def hamada_unturnned_export_all(export_folder):
     objects = bpy.context.selected_objects
     for obj in objects:
         bpy.ops.object.select_all(action='DESELECT')
@@ -144,7 +144,7 @@ def export_all(export_folder):
         export_name = export_folder + obj.name + '.fbx'
         bpy.ops.export_scene.fbx(filepath=export_name, use_selection=True, mesh_smooth_type='FACE')
 
-def export_allZero(export_folder):
+def hamada_unturnned_export_allZero(export_folder):
     objects = bpy.context.selected_objects
     for obj in objects:
         bpy.ops.object.select_all(action='DESELECT')
@@ -157,13 +157,13 @@ def export_allZero(export_folder):
 
 
 classes = (
-    VIEW3D_PT_PanelExportAll,
-    OBJECT_OT_BatchExport,
-    OBJECT_OT_CombinedExporter,
-    OBJECT_OT_ExportZeroPos,
-    OBJECT_OT_CombinedExportZeroPos,
+    hamada_unturnned_PanelExportAll,
+    hamada_unturnned_BatchExportE,
+    hamada_unturnned_CombinedExporterE,
+    hamada_unturnned_ExportZeroPosE,
+    Combinedhamada_unturnned_ExportZeroPosE,
     MySettings,
-    MyUnitScale
+    hamada_unturnned_MyUnitScale
 )
 
 def register():
