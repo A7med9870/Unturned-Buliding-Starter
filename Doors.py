@@ -63,13 +63,26 @@ class OBJECT_OT_add_door_frame_from_blend(Operator):
     @classmethod
     def poll(cls, context):
         preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
-        return preferences.show_doors_objects_panel
+        return preferences.show_Floors_objects_panel
     def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Door Frame"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+
+        # Check the value of the Geo_test preference
+        if preferences.Geo_test:
+            # Action if Geo_test is True
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Door Frame"  # Example object name for Geo_test True case
+            load_object_from_blend(addon_dir, blend_filename, object_name)
+        else:
+            # Action if Geo_test is False
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Door Frame"
+            load_object_from_blend_geot(addon_dir, blend_filename, object_name)
+
         return {'FINISHED'}
+
 
 class OBJECT_OT_add_door_garage_frame_from_blend(Operator):
     """Frame Of garage door"""
@@ -132,6 +145,26 @@ def load_object_from_blend(addon_dir, blend_filename, object_name):
             bpy.context.collection.objects.link(obj)
             bpy.context.view_layer.objects.active = obj
             obj.select_set(True)
+            cursor_location = bpy.context.scene.cursor.location
+            obj.location = cursor_location
+            break
+
+def load_object_from_blend_geot(addon_dir, blend_filename, object_name):
+    filepath = os.path.join(addon_dir, blend_filename)
+    with bpy.data.libraries.load(filepath, link=False) as (data_from, data_to):
+        if object_name in data_from.objects:
+            data_to.objects.append(object_name)
+
+    for obj in data_to.objects:
+        if obj.name == object_name:
+            obj.name = object_name + "_imported"  # Make the name unique
+            bpy.context.collection.objects.link(obj)
+            bpy.context.view_layer.objects.active = obj
+            obj.select_set(True)
+
+            # Set the origin to geometry before setting the location
+            bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='MEDIAN')
+
             cursor_location = bpy.context.scene.cursor.location
             obj.location = cursor_location
             break
