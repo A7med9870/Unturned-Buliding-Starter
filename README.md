@@ -25,6 +25,7 @@ The Unturned Buildings Starter add-on for Blender lets you easily add pre-define
 ## Credit
 Inspired by CravenWarrior add-on
 The oringal creater of the unturned building tempalte
+https://forum.smartlydressedgames.com/t/blender-uii-object-plugin/13851
 
 ## Contributing
 
