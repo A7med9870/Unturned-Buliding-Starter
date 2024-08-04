@@ -56,13 +56,30 @@ class OBJECT_OT_add_Eastern_Window_Frame_from_blend(Operator):
     bl_idname = "mesh.add_eastern_window_frame_from_blend"
     bl_label = "Eastern Window Frame"
     bl_options = {'REGISTER', 'UNDO'}
-
+    @classmethod
+    def poll(cls, context):
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+        return preferences.show_windows_objects_panel
     def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Eastern_Window_frame"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+
+        # Check the value of the Geo_test preference
+        if preferences.Geo_test:
+            # Action if Geo_test is True
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Eastern_Window_frame"  # Example object name for Geo_test True case
+            load_object_from_blend(addon_dir, blend_filename, object_name)
+        else:
+            # Action if Geo_test is False
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Eastern_Window_frame"
+            load_object_from_blend_geot(addon_dir, blend_filename, object_name)
+
         return {'FINISHED'}
+
+
 #Window vent
 class OBJECT_OT_add_Window_Vent_from_blend(Operator):
     """Mall Window 5X5"""
@@ -95,24 +112,53 @@ class OBJECT_OT_add_Window_Circle_frame_from_blend(Operator):
     bl_idname = "mesh.add_window_circlue_frame_blend"
     bl_label = "Circle_window_frame"
     bl_options = {'REGISTER', 'UNDO'}
-
+    @classmethod
+    def poll(cls, context):
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+        return preferences.show_windows_objects_panel
     def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Circle_window_frame"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+
+        # Check the value of the Geo_test preference
+        if preferences.Geo_test:
+            # Action if Geo_test is True
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Circle_window_frame"  # Example object name for Geo_test True case
+            load_object_from_blend(addon_dir, blend_filename, object_name)
+        else:
+            # Action if Geo_test is False
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Circle_window_frame"
+            load_object_from_blend_geot(addon_dir, blend_filename, object_name)
         return {'FINISHED'}
+
 class OBJECT_OT_add_Window_Vent_Frame_from_blend(Operator):
     """Mall Window 5X5"""
     bl_idname = "mesh.add_window_vent_frame_from_blend"
     bl_label = "Window Vent Frame"
     bl_options = {'REGISTER', 'UNDO'}
-
+    @classmethod
+    def poll(cls, context):
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+        return preferences.show_windows_objects_panel
     def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Window vent frame"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+
+        # Check the value of the Geo_test preference
+        if preferences.Geo_test:
+            # Action if Geo_test is True
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Window vent frame"  # Example object name for Geo_test True case
+            load_object_from_blend(addon_dir, blend_filename, object_name)
+        else:
+            # Action if Geo_test is False
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Window vent frame"
+            load_object_from_blend_geot(addon_dir, blend_filename, object_name)
         return {'FINISHED'}
 
 class OBJECT_OT_add_Small_Window_from_blend(Operator):
@@ -133,12 +179,26 @@ class OBJECT_OT_add_wide_Window_frame_from_blend(Operator):
     bl_idname = "mesh.add_window_wide_frame_from_blend"
     bl_label = "Wide Window Frame"
     bl_options = {'REGISTER', 'UNDO'}
-
+    @classmethod
+    def poll(cls, context):
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+        return preferences.show_windows_objects_panel
     def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Wide_Window_Frame"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+
+        # Check the value of the Geo_test preference
+        if preferences.Geo_test:
+            # Action if Geo_test is True
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Wide_Window_Frame"  # Example object name for Geo_test True case
+            load_object_from_blend(addon_dir, blend_filename, object_name)
+        else:
+            # Action if Geo_test is False
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Wide_Window_Frame"
+            load_object_from_blend_geot(addon_dir, blend_filename, object_name)
         return {'FINISHED'}
 
 class OBJECT_OT_add_wide_Window_from_blend(Operator):
@@ -159,12 +219,26 @@ class OBJECT_OT_add_Small_Window_frame_from_blend(Operator):
     bl_idname = "mesh.add_window_small_frame_from_blend"
     bl_label = "Small Window Frame"
     bl_options = {'REGISTER', 'UNDO'}
-
+    @classmethod
+    def poll(cls, context):
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+        return preferences.show_windows_objects_panel
     def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Small_Window_Frame"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+
+        # Check the value of the Geo_test preference
+        if preferences.Geo_test:
+            # Action if Geo_test is True
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Small_Window_Frame"  # Example object name for Geo_test True case
+            load_object_from_blend(addon_dir, blend_filename, object_name)
+        else:
+            # Action if Geo_test is False
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Small_Window_Frame"
+            load_object_from_blend_geot(addon_dir, blend_filename, object_name)
         return {'FINISHED'}
 
 class OBJECT_OT_add_window_frame_from_blend(Operator):
@@ -172,18 +246,35 @@ class OBJECT_OT_add_window_frame_from_blend(Operator):
     bl_idname = "mesh.add_window_a_frame_from_blend"
     bl_label = "Window Frame"
     bl_options = {'REGISTER', 'UNDO'}
-
+    @classmethod
+    def poll(cls, context):
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+        return preferences.show_windows_objects_panel
     def execute(self, context):
-        addon_dir = os.path.dirname(__file__)
-        blend_filename = "U3D.blend"
-        object_name = "Window Frame"
-        load_object_from_blend(addon_dir, blend_filename, object_name)
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+
+        # Check the value of the Geo_test preference
+        if preferences.Geo_test:
+            # Action if Geo_test is True
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Window Frame"  # Example object name for Geo_test True case
+            load_object_from_blend(addon_dir, blend_filename, object_name)
+        else:
+            # Action if Geo_test is False
+            addon_dir = os.path.dirname(__file__)
+            blend_filename = "U3D.blend"
+            object_name = "Window Frame"
+            load_object_from_blend_geot(addon_dir, blend_filename, object_name)
         return {'FINISHED'}
 
 class OBJECT_MT_add_object_menu_windows(Menu):
     bl_label = "U3 Windows"
     bl_idname = "OBJECT_MT_add_object_menu_windows"
-
+    @classmethod
+    def poll(cls, context):
+        preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
+        return preferences.show_windows_objects_panel
     def draw(self, context):
         layout = self.layout
         layout.operator(OBJECT_OT_add_normal_Window_from_blend.bl_idname, icon_value=custom_icons["custom_icon"].icon_id)
@@ -217,6 +308,26 @@ def load_object_from_blend(addon_dir, blend_filename, object_name):
             bpy.context.collection.objects.link(obj)
             bpy.context.view_layer.objects.active = obj
             obj.select_set(True)
+            cursor_location = bpy.context.scene.cursor.location
+            obj.location = cursor_location
+            break
+
+def load_object_from_blend_geot(addon_dir, blend_filename, object_name):
+    filepath = os.path.join(addon_dir, blend_filename)
+    with bpy.data.libraries.load(filepath, link=False) as (data_from, data_to):
+        if object_name in data_from.objects:
+            data_to.objects.append(object_name)
+
+    for obj in data_to.objects:
+        if obj.name == object_name:
+            obj.name = object_name + "_imported"  # Make the name unique
+            bpy.context.collection.objects.link(obj)
+            bpy.context.view_layer.objects.active = obj
+            obj.select_set(True)
+
+            # Set the origin to geometry before setting the location
+            bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='MEDIAN')
+
             cursor_location = bpy.context.scene.cursor.location
             obj.location = cursor_location
             break

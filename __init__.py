@@ -179,6 +179,56 @@ class OBJECT_OT_toggle_geo_test(Operator):
         self.report({'INFO'}, f"Geo Test set to {preferences.Geo_test}")
         return {'FINISHED'}
 
+class VIEW3D_PT_unturned_settings(Panel):
+    bl_label = "Unturned Buildings Starter Settings"
+    bl_idname = "VIEW3D_PT_unturned_settings"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_category = 'UBS_S'
+
+    def draw(self, context):
+        layout = self.layout
+        preferences = context.preferences.addons[__name__].preferences
+
+        layout.prop(preferences, "Geo_test")
+        row = layout.row()
+        #if preferences.show_Export_panel: #disaled as this menu is just aint ready to be lannched
+        #    row.prop(preferences, "show_Export_panel", text="", icon_value=custom_icons["custom_icon"].icon_id)
+        #else:
+        #    row.prop(preferences, "show_Export_panel", text="", icon_value=custom_icons["custom_icon2"].icon_id)
+        #row.prop(preferences, "show_Extra_objects_panel")
+        if preferences.show_Floors_objects_panel:
+            row.prop(preferences, "show_Floors_objects_panel", text="", icon_value=custom_icons["custom_icon13"].icon_id)
+        else:
+            row.prop(preferences, "show_Floors_objects_panel", text="", icon_value=custom_icons["custom_icon13"].icon_id)
+        if preferences.show_doors_objects_panel:
+            row.prop(preferences, "show_doors_objects_panel", text="", icon_value=custom_icons["custom_icon2"].icon_id)
+        else:
+            row.prop(preferences, "show_doors_objects_panel", text="", icon_value=custom_icons["custom_icon2"].icon_id)
+        if preferences.show_windows_objects_panel:
+            row.prop(preferences, "show_windows_objects_panel", text="", icon_value=custom_icons["custom_icon7"].icon_id)
+        else:
+            row.prop(preferences, "show_windows_objects_panel", text="", icon_value=custom_icons["custom_icon7"].icon_id)
+        if preferences.show_ramparts_objects_panel:
+            row.prop(preferences, "show_ramparts_objects_panel", text="", icon_value=custom_icons["custom_icon"].icon_id)
+        else:
+            row.prop(preferences, "show_ramparts_objects_panel", text="", icon_value=custom_icons["custom_icon"].icon_id)
+        if preferences.show_stairs_objects_panel:
+            row.prop(preferences, "show_stairs_objects_panel", text="", icon_value=custom_icons["custom_icon15"].icon_id)
+        else:
+            row.prop(preferences, "show_stairs_objects_panel", text="", icon_value=custom_icons["custom_icon15"].icon_id)
+        if preferences.show_roofs_objects_panel:
+            row.prop(preferences, "show_roofs_objects_panel", text="", icon_value=custom_icons["custom_icon13"].icon_id)
+        else:
+            row.prop(preferences, "show_roofs_objects_panel", text="", icon_value=custom_icons["custom_icon13"].icon_id)
+        if preferences.show_Extra_objects_panel:
+            row.prop(preferences, "show_Extra_objects_panel", text="", icon_value=custom_icons["custom_icon"].icon_id)
+        else:
+            row.prop(preferences, "show_Extra_objects_panel", text="", icon_value=custom_icons["custom_icon2"].icon_id)
+
+        #layout.operator("wm.toggle_geo_test", text="Toggle Geo Test")
+
+
 def add_object_menu(self, context):
     layout = self.layout
 
@@ -192,6 +242,7 @@ def register():
     Ramparts.register()
     Stairs.register()
     exy_extra.register()
+    bpy.utils.register_class(VIEW3D_PT_unturned_settings)
     bpy.utils.register_class(OBJECT_OT_toggle_geo_test)
     global custom_icons
     custom_icons = previews.new()
@@ -260,6 +311,7 @@ def unregister():
     global custom_icons
     bpy.utils.unregister_class(Settingsofwed)
     bpy.utils.unregister_class(OBJECT_OT_toggle_geo_test)
+    bpy.utils.unregister_class(VIEW3D_PT_unturned_settings)
 
     bpy.types.VIEW3D_MT_mesh_add.remove(add_object_menu)
 
