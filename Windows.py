@@ -52,7 +52,7 @@ class OBJECT_OT_add_Eastern_Window_from_blend(Operator):
         return {'FINISHED'}
 
 class OBJECT_OT_add_Eastern_Window_Frame_from_blend(Operator):
-    """Mall Window 5X5"""
+    """Eastern Window Frame 5X5"""
     bl_idname = "mesh.add_eastern_window_frame_from_blend"
     bl_label = "Eastern Window Frame"
     bl_options = {'REGISTER', 'UNDO'}
@@ -108,7 +108,7 @@ class OBJECT_OT_add_Window_Circle_t_from_blend(Operator):
         return {'FINISHED'}
 #Circle_window_frame
 class OBJECT_OT_add_Window_Circle_frame_from_blend(Operator):
-    """Mall Window 5X5"""
+    """Circle window frame"""
     bl_idname = "mesh.add_window_circlue_frame_blend"
     bl_label = "Circle_window_frame"
     bl_options = {'REGISTER', 'UNDO'}
@@ -135,7 +135,7 @@ class OBJECT_OT_add_Window_Circle_frame_from_blend(Operator):
         return {'FINISHED'}
 
 class OBJECT_OT_add_Window_Vent_Frame_from_blend(Operator):
-    """Mall Window 5X5"""
+    """Window Vent Frame"""
     bl_idname = "mesh.add_window_vent_frame_from_blend"
     bl_label = "Window Vent Frame"
     bl_options = {'REGISTER', 'UNDO'}
@@ -175,7 +175,7 @@ class OBJECT_OT_add_Small_Window_from_blend(Operator):
         return {'FINISHED'}
 
 class OBJECT_OT_add_wide_Window_frame_from_blend(Operator):
-    """Mall Window 5X5"""
+    """Wide Window Frame 5X5"""
     bl_idname = "mesh.add_window_wide_frame_from_blend"
     bl_label = "Wide Window Frame"
     bl_options = {'REGISTER', 'UNDO'}
@@ -215,7 +215,7 @@ class OBJECT_OT_add_wide_Window_from_blend(Operator):
         return {'FINISHED'}
 
 class OBJECT_OT_add_Small_Window_frame_from_blend(Operator):
-    """Mall Window 5X5"""
+    """Small Window Frame 5X5"""
     bl_idname = "mesh.add_window_small_frame_from_blend"
     bl_label = "Small Window Frame"
     bl_options = {'REGISTER', 'UNDO'}

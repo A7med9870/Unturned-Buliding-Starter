@@ -1,7 +1,7 @@
 bl_info = {
     "name": "Unturned Buildings Starter",
     "author": "A7med9870",
-    "version": (1, 0),
+    "version": (1, 1, 1),
     "blender": (4, 1, 0),
     "location": "View3D > Add > Mesh > Add Object from Blend File",
     "description": "Adds your desired Unturned style building model to the scene",
@@ -156,6 +156,7 @@ class Settingsofwed(bpy.types.AddonPreferences):
 
         row = layout.row()
         row.prop(self, "Geo_test")
+        # row.operator("preferences.addon_show", icon='SETTINGS').module = 'Unturned-Buliding-Starter-main'
 
         row = layout.row()
         row.operator("wm.url_open", text="Github Page").url = self.documentation_url
@@ -225,6 +226,8 @@ class VIEW3D_PT_unturned_settings(Panel):
             row.prop(preferences, "show_Extra_objects_panel", text="", icon_value=custom_icons["custom_icon"].icon_id)
         else:
             row.prop(preferences, "show_Extra_objects_panel", text="", icon_value=custom_icons["custom_icon2"].icon_id)
+        row.operator("preferences.addon_show", icon='SETTINGS').module = 'Unturned-Buliding-Starter-main'
+
 
         #layout.operator("wm.toggle_geo_test", text="Toggle Geo Test")
 

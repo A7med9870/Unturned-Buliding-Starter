@@ -40,19 +40,22 @@ class add_FloorOnly_from_blend(Operator):
         preferences = bpy.context.preferences.addons['Unturned-Buliding-Starter-main'].preferences
 
         # Check the value of the Geo_test preference
-        if preferences.Geo_test:
-            # Action if Geo_test is True
-            addon_dir = os.path.dirname(__file__)
-            blend_filename = "U3D.blend"
-            object_name = "Floor_only_up"  # Example object name for Geo_test True case
-            load_object_from_blend(addon_dir, blend_filename, object_name)
-        else:
-            # Action if Geo_test is False
-            addon_dir = os.path.dirname(__file__)
-            blend_filename = "U3D.blend"
-            object_name = "Floor_only_up"
-            load_object_from_blend_geot(addon_dir, blend_filename, object_name)
-
+        addon_dir = os.path.dirname(__file__)
+        blend_filename = "U3D.blend"
+        object_name = "Floor_only_up"
+        load_object_from_blend(addon_dir, blend_filename, object_name)
+        # if preferences.Geo_test:
+        #     # Action if Geo_test is True
+        #     addon_dir = os.path.dirname(__file__)
+        #     blend_filename = "U3D.blend"
+        #     object_name = "Floor_only_up"  # Example object name for Geo_test True case
+        #     load_object_from_blend(addon_dir, blend_filename, object_name)
+        # else:
+        #     # Action if Geo_test is False
+        #     addon_dir = os.path.dirname(__file__)
+        #     blend_filename = "U3D.blend"
+        #     object_name = "Floor_only_up"
+        #     load_object_from_blend_geot(addon_dir, blend_filename, object_name)
         return {'FINISHED'}
 
 
